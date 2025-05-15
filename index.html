@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circuit</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="scale">
+        <div class="header">
+            <div class="title-box">
+                <div class="title">Titan's Circuit</div>
+                <div class = "phase">Place your Titans</div>
+            </div>
+
+            <div class="header-right">
+                <button class="reset" onclick="reset()">Reset</button>
+                <div class="total-time">10:00</div>
+            </div>
+        </div>
+        <div class="main-container">
+            <div class="left-panel">
+                <div class="p1">
+                    <div class="box box-1" >
+                        <div class = "name"><span class="name1">Player 1</span></div>
+                        <div class="score1">0</div>
+                        <div class="pieces1"></div>
+                    </div>
+                    <div class="time">
+                        <div class="line left-line"></div>
+                        <div class="line right-line"></div>
+                        <div class="time-1">30</div>
+
+                    </div>
+                </div>
+                <div class="p2">
+                    <div class="box box-2">
+                        <div class = "name"><span class="name2">Player 2</span></div>
+                        <div class="score2">0</div>
+                        <div class="pieces2"></div>
+                    </div>
+                    <div class="time">
+                        <div class="line left-line"></div>
+                        <div class="line right-line"></div>
+                        <div class="time-2">30</div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="middle-panel">
+                <svg id="shape" viewbox="0 0 640 640"></svg>
+                <div class="undo-redo">
+                    <button id="undo" onclick="undo()">Undo</button>
+                    <button id="redo" onclick="redo()">Redo</button>
+                </div>
+                <div class="pause">
+                    <img id="pause" src="images/pause_icon_wider.png" onclick="pause()" alt="Pause">
+                </div>
+            </div>
+            <div class="right-panel">
+                <h2>Move History</h2>
+                <div class="history-container"></div>
+            </div>
+        </div>
+        <div class="overlay hidden">
+            <div class="modal">
+                <button class="close">&times;</button>
+                <div class="winTitle">
+                    <span class="winMsg">Player X Won!</span>
+                    <span class="winBy">by timeout</span>
+                </div>
+                <div class="players">
+                    <div class="name-1">Player 1</div>
+                    <div class="name-2">Player 2</div>
+                </div>
+                <div class="score">
+                    <div class="final-score1">0</div>
+                    <div class="final-score2">0</div>
+                </div>
+                <div class="buttons">
+                    <button class="rematch" onclick="reset()">Rematch</button>
+                    <button class="leaderboard-button" onclick="window.location.href='leaderboard.html'">Leaderboard</button>
+                </div>
+            </div>
+        </div>
+        <audio id="error" src="sounds/error.wav"></audio>
+        <audio id="place" src="sounds/place.wav"></audio>
+        <audio id="move" src="sounds/move.wav" ></audio>
+        <audio id="eliminate" src="sounds/eliminate.wav" ></audio>
+        <audio id="undoRedo" src="sounds/undo.wav" ></audio>
+        <audio id="pauseResume" src="sounds/pause2.wav" ></audio>
+        <audio id="win" src="sounds/win.wav" ></audio>
+        <audio id="lose" src="sounds/computerWin.wav" ></audio>
+        <script src="index.js"></script>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+body{
+    background-color: #0c0b1c;
+    font-family: 'Space Grotesk', sans-serif;
+    color:white;
+}
+.heading {
+    text-align: center;
+    font-size: 5rem;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    color: #dcdce5;
+}
+
+.leaderboard {
+    max-width: 500px;
+    margin: 0 auto;
+    background: #1a1a23;
+    border: 1px solid #2e2e38;
+    border-radius: 10px;
+    padding: 0;              /* we'll handle spacing in .entry */
+    overflow: hidden;
+
+}
+
+.entry {
+    display: grid;
+    grid-template-columns: 100px 1fr 80px; /* Rank | Player | Score */
+    align-items: center;
+    padding: 12px 20px;
+    border-bottom: 1px solid #2a2a35;
+    font-size: 1.5rem;
+    color: #fff;
+    background: #1a1a23;
+}
+
+.entry.header {
+    background: #1e1e28;
+    font-weight: 500;
+    font-size: 1.3rem;
+    color: #ccc;
+    border-bottom: 2px solid #444;
+}
+
+.entry:last-child {
+    border-bottom: none;
+}
+
+.entry:not(.header):hover {
+    background: #2a2a35;
+}
+
+.rank   { text-align: left;  }
+.name   { padding: 0 10px; text-align: left; }
+.score  { text-align: right; }
+
+.back-button {
+    font-size: 1.1rem;
+    font-weight: bold;
+    display: block;
+    width: 120px;
+    height: 50px;
+    text-align: center;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #292936;
+    color: #dcdce5;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.back-button:hover {
+    background-color: #373748;
+}
