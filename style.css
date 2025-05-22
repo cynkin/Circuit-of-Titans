@@ -539,25 +539,6 @@ body {
     transition:all 0.25s;
 }
 
-/*#undo::before, #redo::before{*/
-/*    content:"";*/
-/*    position: absolute;*/
-/*    top:0;*/
-/*    left: 0;*/
-/*    width: 200%;*/
-/*    height: 150%;*/
-/*    background: white;*/
-/*    transform: translateX(-100%) translateY(-100%) rotate(45deg);*/
-/*    transition: transform 0.5s ease;*/
-/*    z-index: -1;*/
-/*}*/
-
-/*#undo:hover::before, #redo:hover::before{*/
-/*    transform: translateX(0) translatey(0) rotate(45deg);*/
-/*    transform-origin: center;*/
-
-/*}*/
-
 #undo:hover, #redo:hover{
     background-color: #ffffff;
     color: #0f1923;

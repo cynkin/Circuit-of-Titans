@@ -17,7 +17,7 @@ let playerInterval = null;
 let timerInterval = null;
 let isPaused = false;
 let noOfTitans = 0;
-let isSinglePlayer = true;
+let isSinglePlayer = false;
 let lastClickTime = 0;
 let placed = false;
 
@@ -717,162 +717,162 @@ function evaluate(i, j, playerID, p) {
     return score;
 }
 
-function evaluateBoard(playerId){
-    let opponentId = playerId === 1? 2 : 1;
+// function evaluateBoard(playerId){
+//     let opponentId = playerId === 1? 2 : 1;
+//
+//     let score = 0;
+//
+//     for(let i = 0; i<noOfRings; i++){
+//         for(let j = 0; j<sides; j++){
+//             if(occupied[i][j] === playerId) {
+//                 score += evaluate(i, j, 2, 0);
+//             }
+//         }
+//     }
+//
+//     // for (let j = 0; j < sides; j++) {
+//     //     const cell = occupied[0][j];
+//     //     if (cell === playerId) score += 30;
+//     //     if (cell === opponentId) score -= 25;
+//     // }
+//
+//     edgeInfo.forEach(edge  => {
+//         const fromId = getOwner(edge.from);
+//         const toId = getOwner(edge.to);
+//         if (fromId === playerId && toId === playerId) {
+//             score += edge.weight * 15;
+//         }
+//         if (fromId === opponentId && toId === opponentId) {
+//             score -= edge.weight * 12;
+//         }
+//     })
+//
+//     score += (players[playerId].titans - players[opponentId].titans) * 25;
+//     score += (getAllMoves(playerId).length - getAllMoves(opponentId).length) * 8;
+//
+//     return score;
+// }
+//
+// function makeMove(move, playerId){
+//     if(move.type === "place") {
+//         occupied[move.to.ring][move.to.index] = playerId;
+//         players[playerId].pTitans++;
+//         noOfTitans++;
+//     }
+//     else{
+//         occupied[move.from.ring][move.from.index] = 0;
+//         occupied[move.to.ring][move.to.index] = playerId;
+//     }
+// }
+//
+// function undoMove(move, playerId){
+//     if(move.type === "place") {
+//         occupied[move.to.ring][move.to.index] = 0;
+//         players[playerId].pTitans--;
+//         noOfTitans--;
+//     }
+//     else
+//         occupied[move.from.ring][move.from.index] = playerId;
+//         occupied[move.to.ring][move.to.index] = 0;
+// }
+//
+// function isTerminalNode() {
+//
+//     if(occupied[0].every(cell => cell !== 0)) return true;
+//
+//     if(players[1].titans <= 1 || players[2].titans <= 1) return true;
+//
+//     // if(noOfTitans === 8) {
+//     //     return getAllMoves(1).length === 0 && getAllMoves(2).length === 0;
+//     // }
+//
+//     return false;
+// }
 
-    let score = 0;
+// function minimax(depth, isMaximizing, alpha = -Infinity, beta = Infinity, playerId){
+//     if(depth === 0 || isTerminalNode()) {
+//         return {score: evaluateBoard(2)};
+//     }
+//
+//     console.log("depth", depth, "isMaximizing", isMaximizing, "alpha", alpha, "beta", beta, "Player ID", playerId);
+//
+//     let bestMove = null;
+//     let bestScore = isMaximizing? -Infinity : Infinity;
+//
+//     const moves = getAllMoves(playerId);
+//
+//     for(const move of moves){
+//         makeMove(move, playerId);
+//
+//         const result = minimax(depth - 1, !isMaximizing, alpha, beta, playerId === 1? 2 : 1);
+//
+//         undoMove(move, playerId);
+//
+//         if(isMaximizing) {
+//             if (result.score > bestScore) {
+//                 bestScore = result.score;
+//                 bestMove = move;
+//                 alpha = Math.max(alpha, bestScore);
+//             }
+//         }
+//         else{
+//             if(result.score < bestScore){
+//                 bestScore = result.score;
+//                 bestMove = move;
+//                 beta = Math.min(beta, bestScore);
+//             }
+//         }
+//
+//         if(alpha >= beta) break;
+//     }
+//
+//     return {score: bestScore, move: bestMove};
+// }
 
-    for(let i = 0; i<noOfRings; i++){
-        for(let j = 0; j<sides; j++){
-            if(occupied[i][j] === playerId) {
-                score += evaluate(i, j, 2, 0);
-            }
-        }
-    }
+// function aiMove(difficulty){
+//
+//     console.log("AI Move")
+//     if(isPaused) return;
+//
+//     const playerId = 2;
+//     let bestmove = null;
+//
+//     let depth = difficulty + 1;
+//
+//     const result = minimax(depth, true, -Infinity, Infinity, playerId);
+//     bestmove = result.move;
+//
+//     console.log(`Chose move at (${bestmove.to.ring},${bestmove.to.index}) because:`);
+//     console.log(`- Ring value: ${result.score}`);
+//
+//     if(bestmove){
+//         if(bestmove.type === "place") {
+//             playSound("place");
+//             clickLock = false;
+//             handleClick(bestmove.to.ring, bestmove.to.index);
+//         }
+//         else{
+//             playSound("place");
+//             let i = bestmove.from.ring;
+//             let j = bestmove.from.index;
+//             selectedTitan = {ring: i, index: j};
+//             circleSet[i][j].setAttribute("stroke", "yellow");
+//             showMoves(i, j);
+//
+//
+//             setTimeout(()=>{
+//                 playSound("move");
+//                 clickLock = false;
+//                 handleClick(bestmove.to.ring, bestmove.to.index);
+//             }, 500);
+//
+//         }
+//     }
+//     else console.log("ERROR");
+//
+// }
 
-    // for (let j = 0; j < sides; j++) {
-    //     const cell = occupied[0][j];
-    //     if (cell === playerId) score += 30;
-    //     if (cell === opponentId) score -= 25;
-    // }
-
-    edgeInfo.forEach(edge  => {
-        const fromId = getOwner(edge.from);
-        const toId = getOwner(edge.to);
-        if (fromId === playerId && toId === playerId) {
-            score += edge.weight * 15;
-        }
-        if (fromId === opponentId && toId === opponentId) {
-            score -= edge.weight * 12;
-        }
-    })
-
-    score += (players[playerId].titans - players[opponentId].titans) * 25;
-    score += (getAllMoves(playerId).length - getAllMoves(opponentId).length) * 8;
-
-    return score;
-}
-
-function makeMove(move, playerId){
-    if(move.type === "place") {
-        occupied[move.to.ring][move.to.index] = playerId;
-        players[playerId].pTitans++;
-        noOfTitans++;
-    }
-    else{
-        occupied[move.from.ring][move.from.index] = 0;
-        occupied[move.to.ring][move.to.index] = playerId;
-    }
-}
-
-function undoMove(move, playerId){
-    if(move.type === "place") {
-        occupied[move.to.ring][move.to.index] = 0;
-        players[playerId].pTitans--;
-        noOfTitans--;
-    }
-    else
-        occupied[move.from.ring][move.from.index] = playerId;
-        occupied[move.to.ring][move.to.index] = 0;
-}
-
-function isTerminalNode() {
-
-    if(occupied[0].every(cell => cell !== 0)) return true;
-
-    if(players[1].titans <= 1 || players[2].titans <= 1) return true;
-
-    // if(noOfTitans === 8) {
-    //     return getAllMoves(1).length === 0 && getAllMoves(2).length === 0;
-    // }
-
-    return false;
-}
-
-function minimax(depth, isMaximizing, alpha = -Infinity, beta = Infinity, playerId){
-    if(depth === 0 || isTerminalNode()) {
-        return {score: evaluateBoard(2)};
-    }
-
-    console.log("depth", depth, "isMaximizing", isMaximizing, "alpha", alpha, "beta", beta, "Player ID", playerId);
-
-    let bestMove = null;
-    let bestScore = isMaximizing? -Infinity : Infinity;
-
-    const moves = getAllMoves(playerId);
-
-    for(const move of moves){
-        makeMove(move, playerId);
-
-        const result = minimax(depth - 1, !isMaximizing, alpha, beta, playerId === 1? 2 : 1);
-
-        undoMove(move, playerId);
-
-        if(isMaximizing) {
-            if (result.score > bestScore) {
-                bestScore = result.score;
-                bestMove = move;
-                alpha = Math.max(alpha, bestScore);
-            }
-        }
-        else{
-            if(result.score < bestScore){
-                bestScore = result.score;
-                bestMove = move;
-                beta = Math.min(beta, bestScore);
-            }
-        }
-
-        if(alpha >= beta) break;
-    }
-
-    return {score: bestScore, move: bestMove};
-}
-
-function aiMove(difficulty){
-
-    console.log("AI Move")
-    if(isPaused) return;
-
-    const playerId = 2;
-    let bestmove = null;
-
-    let depth = difficulty + 1;
-
-    const result = minimax(depth, true, -Infinity, Infinity, playerId);
-    bestmove = result.move;
-
-    console.log(`Chose move at (${bestmove.to.ring},${bestmove.to.index}) because:`);
-    console.log(`- Ring value: ${result.score}`);
-
-    if(bestmove){
-        if(bestmove.type === "place") {
-            playSound("place");
-            clickLock = false;
-            handleClick(bestmove.to.ring, bestmove.to.index);
-        }
-        else{
-            playSound("place");
-            let i = bestmove.from.ring;
-            let j = bestmove.from.index;
-            selectedTitan = {ring: i, index: j};
-            circleSet[i][j].setAttribute("stroke", "yellow");
-            showMoves(i, j);
-
-
-            setTimeout(()=>{
-                playSound("move");
-                clickLock = false;
-                handleClick(bestmove.to.ring, bestmove.to.index);
-            }, 500);
-
-        }
-    }
-    else console.log("ERROR");
-
-}
-
-async function aiMove2(difficulty){
+async function aiMove(difficulty){
     const moves = [];
     console.log("AI titans placed:", players[2].pTitans);
 
