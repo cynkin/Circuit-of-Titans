@@ -88,6 +88,61 @@
                 </div>
             </div>
         </div>
+        <div class="overlay" id="config-overlay">
+            <div class="modal">
+                <div class="winTitle">
+                    <span class="winMsg">Configuration Settings</span>
+                </div>
+
+                <div class="space">
+                <div class="config-input">
+                    <label for="noOfRings">Number of Rings:</label>
+                    <select id="noOfRings" class="config-options" name="noOfRings" defaultValue="3">
+                        <option value="2">2</option>
+                        <option value="3" selected>3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                    </select>
+                </div>
+
+                <div class="config-input">
+                    <label for="sides">Number of Sides:</label>
+                    <select id="sides" class="config-options" name="sides" defaultValue="6">
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6" selected>6</option>
+                    </select>
+                </div>
+
+                <div class="config-input">
+                    <label for="PlayerTime">Time for each move</label>
+                    <input
+                            id="PlayerTime"
+                            name="PlayerTime"
+                            type="number"
+                            class="config-options"
+                            min="5"
+                            max="60"
+                            value="30"
+                    />
+                </div>
+
+                <div class="config-input">
+                    <label for="mode">Mode</label>
+                    <select id="mode" class="config-options" name="mode" defaultValue="Computer">
+                        <option value="player">Player</option>
+                        <option value="computer" selected>Computer</option>
+                    </select>
+                </div>
+                </div>
+                <div class="buttons">
+                    <button class="rematch" onclick="configSubmit()">Save and Next</button>
+                </div>
+            </div>
+        </div>
         <audio id="error" src="sounds/error.wav"></audio>
         <audio id="place" src="sounds/place.wav"></audio>
         <audio id="move" src="sounds/move.wav" ></audio>

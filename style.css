@@ -435,6 +435,25 @@ body {
     /*box-shadow: 0 0 20px #000000aa;*/
 }
 
+.config-input{
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.config-options{
+    font-size: 1.2rem;
+    margin: 2px;
+    background: #ffffff;
+    border: none
+}
+
+.space{
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
 .hidden{
     visibility: hidden;
 }

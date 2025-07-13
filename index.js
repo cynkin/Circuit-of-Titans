@@ -2,8 +2,8 @@ const svg = document.getElementById("shape");
 const centerX = 320;
 const centerY = 320;
 // const radius = [90, 190, 290];
-const sides = 6;
-const noOfRings = 3;
+let sides = 6;
+let noOfRings = 3;
 const innerRadius = 15;
 let totalSeconds = 10*60;
 let PlayerTime = 30;
@@ -17,7 +17,7 @@ let playerInterval = null;
 let timerInterval = null;
 let isPaused = false;
 let noOfTitans = 0;
-let isSinglePlayer = false;
+let isSinglePlayer = true;
 let lastClickTime = 0;
 let placed = false;
 
@@ -98,8 +98,21 @@ pieces2.appendChild(row2);
 
 
 const players = {
-    1  : {name: "Player 1", color :"#ff2e63", id :1, titans: 4, pTitans:0, row:row1, image: image1, list:pieces1, time:15, score:0},
-    2  : {name: "Player 2", color :"#2bc1ff", id :2, titans: 4, pTitans:0, row:row2, image: image2, list:pieces2, time:15, score:0},
+    1  : {name: "Player 1", color :"#ff2e63", id :1, titans: 4, pTitans:0, row:row1, image: image1, list:pieces1, time:PlayerTime, score:0},
+    2  : {name: "Player 2", color :"#2bc1ff", id :2, titans: 4, pTitans:0, row:row2, image: image2, list:pieces2, time:PlayerTime, score:0},
+}
+
+function configSubmit(){
+    console.log("Configuring");
+    noOfRings = parseInt(document.getElementById("noOfRings").value);
+    sides = parseInt(document.getElementById("sides").value);
+    
+    PlayerTime = parseInt(document.getElementById("PlayerTime").value);
+    mode = document.getElementById("mode").value;
+    isSinglePlayer = mode === "computer";
+    
+    const overlay = document.getElementById("config-overlay");
+    overlay.classList.add("hidden");
 }
 
 
@@ -448,10 +461,10 @@ function gameOver(b, id=0){
     saveScore(winner, score, b);
 }
 
-saveScore("Player 1", 10, 0);
-saveScore("Player 2", 20, 0);
-saveScore("Player 3", 30, 0);
-saveScore("Player 2", 40, 0);
+// saveScore("Player 1", 10, 0);
+// saveScore("Player 2", 20, 0);
+// saveScore("Player 3", 30, 0);
+// saveScore("Player 2", 40, 0);
 
 function saveScore(winner, score, b){
     if(!winner) return;
@@ -901,7 +914,7 @@ async function aiMove(difficulty){
             clickLock = false;
             handleClick(i, j);
         }
-        else if(difficulty === 1) {
+        if(difficulty === 1) {
             let score = -30;
             let i, j;
             for(let k = 0; k<moves.length; k++){
@@ -917,8 +930,6 @@ async function aiMove(difficulty){
             console.log("AI placement", i, j);
             handleClick(i, j);
         }
-
-
     }
 
     //MOVEMENT
@@ -1181,7 +1192,7 @@ async function handleClick(i, j) {
         console.log("AI MOVE");
         clickLock = true;
         setTimeout(()=>{
-            aiMove(4);
+            aiMove(0);
         }, Math.random()*1000 + 500);
 
     }
